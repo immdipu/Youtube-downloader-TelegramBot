@@ -34,9 +34,7 @@ const AudioDownloader = async (audioLink, name, chatId, bot) => {
       const percentage = ((downloadedSizeBytes / totalSizeBytes) * 100).toFixed(
         2
       );
-      console.log(
-        `Downloaded: ${downloadedSizeMB}/${totalSizeMB} MB (${percentage}%)`
-      );
+
       // Send progress update to the Telegram bot
       sendProgressUpdate(chatId, parseFloat(percentage), bot);
     });
@@ -58,7 +56,6 @@ const AudioDownloader = async (audioLink, name, chatId, bot) => {
 const sendProgressUpdate = async (chatId, percentage, bot) => {
   try {
     if (!progressMessageId) {
-      // If progress message doesn't exist, send a new one
       const message = await bot.sendMessage(
         chatId,
         `Downloading: ${percentage.toFixed(2)}%`
